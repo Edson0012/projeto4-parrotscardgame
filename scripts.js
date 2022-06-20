@@ -8,6 +8,8 @@ const parrotcard = [
     "unicornparrot.gif",
 ];
 
+let jogadas = 0;
+
 let parrot_game = [];
 
 let gameNumber = prompt(
@@ -45,6 +47,7 @@ for (let i = 0; i < gameNumber; i++) {
 }
 
 function game(elemento) {
+    jogadas++;
     const selecionado = document.querySelector(".selecionado");
     elemento.classList.add("back");
     elemento.classList.add("selecionado");
@@ -63,7 +66,7 @@ function game(elemento) {
                     return elemento.getAttribute("name") !== valor;
                 });
                 if (parrot_game.length === 0) {
-                    alert("FIM DE JOGO");
+                    alert(`voce ganhou em ${jogadas} jogadas`);
                 }
             } else {
                 elemento.classList.remove("back");
