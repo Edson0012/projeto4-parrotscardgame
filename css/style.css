@@ -1,0 +1,56 @@
+body {
+    background: #eef9bf;
+    font-family: "Roboto", sans-serif;
+}
+
+header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 66px;
+    letter-spacing: -0.004em;
+    color: #75b79e;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.container {
+    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    margin: 0 auto;
+}
+
+.container > div {
+    width: 117px;
+    height: 146px;
+    background: #a7e9af;
+    border: 1px solid #99cea8;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.front {
+    opacity: 1;
+    z-index: 1;
+    transition: all 0.25s linear;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
