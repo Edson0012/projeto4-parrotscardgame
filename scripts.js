@@ -1,13 +1,14 @@
 const parrotcard = [
-    `<img src="/img/bobrosssparrot.gif" />
-    <img src="/img/explodyparrot.gif" />
-    <img src="/img/fiestaparrot.gif" />
-    <img src="/img/metalparrot.gif.gif" />
-    <img src="/img/revertitparrot.gif" />
-    <img src="/img/tripletsparrot.gif" />
-    <img src="/imgunicornparrot.gif" />
-    `,
+    "bobrossparrot.gif",
+    "explodyparrot.gif",
+    "fiestaparrot.gif",
+    "metalparrot.gif",
+    "revertitparrot.gif",
+    "tripletsparrot.gif",
+    "unicornparrot.gif",
 ];
+
+let parrot_game = [];
 
 let gameNumber = prompt(
     "com quantas cartas quer jogar? (escolha números pares de 4 a 14)"
@@ -21,23 +22,63 @@ while (
     gameNumber = prompt(`apenas números impares a partir de 4 a 14 amigo o.o`);
 }
 
-for (let i = 0; i < parrotcard.length; i++) {
-    parrotcard.push[i];
-    parrotcard.push[i];
+parrotcard.sort(comparador);
+
+function comparador() {
+    return Math.random() - 0.5;
 }
+
+for (let i = 0; i < gameNumber / 2; i++) {
+    parrot_game.push(parrotcard[i]);
+    parrot_game.push(parrotcard[i]);
+}
+
+parrot_game.sort(comparador);
 
 const allcards = document.querySelector(".container");
 for (let i = 0; i < gameNumber; i++) {
     allcards.innerHTML += ` 
-            <div onclick="selecionarCard(this)" name=${parrot_game[i]}>
+            <div class="front" onclick="game(this)" name=${parrot_game[i]}>
                 <img src="img/front.png" />
             </div>
         `;
 }
 
-const parrot_game = [];
-
-for (let i = 0; i < gameNumber / 2; i++) {
-    parrot_game.push(parrotcard[i]);
-    parrot_game.push(parrotcard[i]);
+function game(elemento) {
+    const selecionado = document.querySelector(".selecionado");
+    elemento.classList.add("back");
+    elemento.classList.add("selecionado");
+    const img = elemento.querySelector("img");
+    img.src = `img/${elemento.getAttribute("name")}`;
+    elemento.setAttribute("onclick", "");
+    if (selecionado !== null) {
+        const cards = document.querySelectorAll(".front");
+        cards.forEach((valor) => valor.setAttribute("onclick", ""));
+        setTimeout(() => {
+            if (
+                selecionado.getAttribute("name") ===
+                elemento.getAttribute("name")
+            ) {
+                parrot_game = parrot_game.filter((valor) => {
+                    return elemento.getAttribute("name") !== valor;
+                });
+                if (parrot_game.length === 0) {
+                    alert("FIM DE JOGO");
+                }
+            } else {
+                elemento.classList.remove("back");
+                selecionado.classList.remove("back");
+                const img2 = selecionado.querySelector("img");
+                img.src = `img/front.png`;
+                img2.src = `img/front.png`;
+                elemento.setAttribute("onclick", "game(this)");
+                selecionado.setAttribute("onclick", "game(this)");
+            }
+            cards.forEach((valor) =>
+                valor.setAttribute("onclick", "game(this)")
+            );
+            selecionado.classList.remove("selecionado");
+            elemento.classList.remove("selecionado");
+        }, 1000);
+    }
 }

@@ -54,3 +54,12 @@ img {
 .back {
     transform: rotateY(180deg);
 }
+
+@media (max-width: 335px) {
+    h1 {
+        font-size: 36px;
+        line-height: 42px;
+        text-align: center;
+        letter-spacing: -0.004em;
+    }
+}
